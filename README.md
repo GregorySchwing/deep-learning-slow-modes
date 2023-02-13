@@ -15,5 +15,6 @@ This repository contains input data and code related to the manuscript:
 
 Due to size limits the outputs trajectories of Chignolin and Silicon simulations are deposited in the [Materials Cloud](https://doi.org/10.24435/materialscloud:3g-9x) repository.
 
-sudo docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm -it -p 8888:8888  nvcr.io/nvidia/pytorch:22.07-py3
+sudo docker run --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --rm -it -p 8888:8888  nvcr.io/nvidia/pytorch:22.07-py3;
+
 jupyter lab --allow-root --ip 0.0.0.0 --port 8888
