@@ -451,7 +451,12 @@ class DeepTICA(nncv.BaseNNCV):
 
         # == Export jit model ==
         fake_input = torch.zeros(self.n_input).reshape(1,self.n_input)
-        mod = torch.jit.trace(self, fake_input)
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        print('Using device:', device)
+        print()
+        if device.type == 'cuda':
+            print(torch.cuda.get_device_name(0))
+        mod = torch.jit.trace(self, fake_input.to(device))
         mod.save(tr_folder+"model_all.pt")
         print("@@ traced torchscript model (for C++) in: ", tr_folder+"model_deeptica.pt" )
 
