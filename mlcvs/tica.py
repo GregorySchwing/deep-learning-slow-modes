@@ -545,10 +545,18 @@ def look_for_configurations(x,t,lag):
         for k in range(n_j):
             w_t.append((t[i+1]-t[i])/float(n_j))
 
-    x_t = torch.Tensor(x_t)
-    x_lag = torch.Tensor(x_lag)
-    w_t = torch.Tensor(w_t)
-    w_lag = torch.Tensor(w_lag)
+    # setting device on GPU if available, else CPU
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print('Using device:', device)
+    print()
+
+    #Additional Info when using cuda
+    if device.type == 'cuda':
+        print(torch.cuda.get_device_name(0))
+    x_t = torch.Tensor(x_t).to(device)
+    x_lag = torch.Tensor(x_lag).to(device)
+    w_t = torch.Tensor(w_t).to(device)
+    w_lag = torch.Tensor(w_lag).to(device)
 
     return x_t,x_lag,w_t,w_lag
 
